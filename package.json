@@ -1,0 +1,16 @@
+{
+    "dependencies": {
+        "puppeteer": "^21.2.1",
+        "qrcode-terminal": "^0.12.0",
+        "whatsapp-web.js": "https://github.com/Julzk/whatsapp-web.js/tarball/jkr_hotfix_8"
+    },
+    "name": "whatest",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo 'Error: no test specified' && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}
