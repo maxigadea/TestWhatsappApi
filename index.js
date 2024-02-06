@@ -11,6 +11,9 @@ const clients = []; // Matriz para almacenar clientes activos
 
 async function initializeClient(clientId) {
     const client = new Client({
+        puppeteer: {
+            args: ['--no-sandbox'],
+        },
         authStrategy: new LocalAuth({ clientId: clientId })
     });
 
