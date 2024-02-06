@@ -22,9 +22,9 @@ async function initializeClient(clientId) {
     client.on('ready', () => {
         console.log(`Cliente de la sesión "${clientId}" está listo!`);
         clients.push({ session: { name: clientId }, client, used: false }); // Agregar cliente a la lista de clientes activos
-        if (clients.length === 1) {
+        
             generateNextQR(); // Generar QR para el siguiente cliente después de que el primero esté listo
-        }
+        
     });
 
     client.on('disconnected', () => {
@@ -40,27 +40,16 @@ async function initializeClient(clientId) {
 }
 
 async function initializeClients() {
-    for (let i = 1; i <= MAX_CLIENTS; i++) {
-        const clientId = `client-${i}`;
-        await initializeClient(clientId);
-    }
+    const clientId = `${clients.length}`;
+    await initializeClient(clientId);
 }
 
 function generateNextQR() {
-    currentClientIndex++; // Avanzar al siguiente cliente
-    if (currentClientIndex >= clients.length) {
-        currentClientIndex = 0; // Reiniciar al primer cliente si llegamos al final de la lista
-    }
+    
+   
+        console.log(`Iniciando el siguiente cliente: ${clients.length}`);
+        initializeClient(clients.length);
 
-    const nextClient = clients[currentClientIndex];
-
-    // Verificar si el siguiente cliente ha sido utilizado
-    if (nextClient.used) {
-        console.log(`Generando código QR para el siguiente cliente en uso: ${nextClient.session.name}`);
-        nextClient.client.refreshQR(); // Generar código QR para el siguiente cliente en uso
-    } else {
-        console.log(`Esperando a que se utilice el cliente: ${nextClient.session.name}`);
-    }
 }
 
 initializeClients(); // Inicializar clientes
